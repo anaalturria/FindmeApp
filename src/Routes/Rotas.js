@@ -23,6 +23,7 @@ export default function Rotas() {
         return (<Login />)
     }
 
+
     return (
         <NavigationContainer>
             <Tab.Navigator

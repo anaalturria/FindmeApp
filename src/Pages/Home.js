@@ -1,48 +1,85 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Text, FlatList, Button, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Produto from '../Components/Produto';
-import Stories from '../Components/Stories';
+import { ActivityIndicator } from 'react-native';
 
+
+import Pessoas from '../Components/Pessoas';
+import Produto from '../Components/Produto';
 
 export default function Home() {
 
-  const [produtos, setProdutos] = useState([]);
+  const[ pessoas, setPessoas ] = useState([]);
+  const[ observacoes, setObservacoes ] = useState([]);
+  const[ error, setError ] = useState(false)
 
-  async function getProdutos() {
-    await fetch('https://fakestoreapi.com/products', {
+  async function getPessoas() {
+    await fetch('http://10.139.75.41:5251/api/Pessoas/GetAllPessoas', {
       method: 'GET',
       headers: {
-        'content-type': 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(json => setProdutos(json))
-      .catch(err => console.log(err))
-  }
-
+          'content-type' : 'application/json'
+      },
+      
+  })
+  .then( res => (res.ok == true) ? res.json() : false )
+  .then( json => setPessoas(json) )
+      .catch( err => setError( true ))
+  } 
+  
   useEffect(() => {
-    getProdutos();
-  }, [])
+    getPessoas();
+  }, [] )
+
+  async function getObservacoes() {
+    await fetch('http://10.139.75.41:5251/api/Observacoes/GetAllObservacoes', {
+      method: 'GET',
+      headers: {
+          'content-type' : 'application/json'
+      },
+      
+  })
+  .then( res => (res.ok == true) ? res.json() : false )
+  .then( json => setObservacoes(json) )
+      .catch( err => setError( true ))
+  } 
+
+  
+  useEffect(() => {
+    getObservacoes();
+  }, [] )
+
+
 
   return (
-    <View style={css.container}>
-      {produtos ?
-        <>
-          <Stories produtos={produtos} />
+    <View>
+      {   pessoas.length > 0 ?
           <FlatList
-            data={produtos}
-            renderItem={({ item }) => <Produto title={item.title} price={item.price} image={item.image} description={item.description} category={item.category} rating={item.rating} />}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={{ height: (produtos.length * 600) + 110 }}
-          />
-        </>
-        :
-        <Text style={css.text}>Carregando produtos...</Text>
+              data={pessoas}
+              renderItem={({ item }) =>
+              <Pessoas
+              pessoaNome={item.pessoaNome}
+              pessoaRoupa={item.pessoaRoupa}
+              pessoaFoto={item.pessoaFoto}
+              pessoaCor={item.pessoaCor}
+              pessoaObservacao={item.pessoaObservacao}
+              
+              
+              />
+
+            }
+            
+          keyExtractor={(item) => item.id}
+          
+        />     
+        : <ActivityIndicator size='large' color="#00ff00"/>
       }
-    </View>
+
+      
+
+      </View>
+      
   )
 }
-const css = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: "#191919",
     flexGrow: 1,
