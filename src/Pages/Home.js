@@ -6,6 +6,7 @@ import { ActivityIndicator } from 'react-native';
 import Pessoas from '../Components/Pessoas';
 import Produto from '../Components/Produto';
 
+
 export default function Home() {
 
   const[ pessoas, setPessoas ] = useState([]);
@@ -29,23 +30,7 @@ export default function Home() {
     getPessoas();
   }, [] )
 
-  async function getObservacoes() {
-    await fetch('http://10.139.75.41:5251/api/Observacoes/GetAllObservacoes', {
-      method: 'GET',
-      headers: {
-          'content-type' : 'application/json'
-      },
-      
-  })
-  .then( res => (res.ok == true) ? res.json() : false )
-  .then( json => setObservacoes(json) )
-      .catch( err => setError( true ))
-  } 
 
-  
-  useEffect(() => {
-    getObservacoes();
-  }, [] )
 
 
 
@@ -60,18 +45,29 @@ export default function Home() {
               pessoaRoupa={item.pessoaRoupa}
               pessoaFoto={item.pessoaFoto}
               pessoaCor={item.pessoaCor}
+              pessoaSexo={item.pessoaSexo}
               pessoaObservacao={item.pessoaObservacao}
-              
+              pessoaLocalDesaparecimento={item.pessoaLocalDesaparecimento}
+              pessoaDtDesaparecimento={item.pessoaDtDesaparecimento}
+              pessoaDtEncontro={item.pessoaDtEncontro}
               
               />
+             
 
             }
             
           keyExtractor={(item) => item.id}
           
-        />     
+        />   /*<Detalhes 
+                observacoesDescricao={item.observacoesDescricao}
+                observacoesLocal={item.observacoesLocal}
+                observacoesData={item.observacoesData}
+                pessoaId={item.pessoaId}
+                usuarioId={item.usuarioId}
+              />  */
         : <ActivityIndicator size='large' color="#00ff00"/>
-      }
+      } 
+
 
       
 

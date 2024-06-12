@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Detalhes from './Detalhes';
+
+import Produto from './Produto';
+import Observacao from './Observacao';
 
 
 export default function Pessoas(
@@ -14,11 +16,7 @@ export default function Pessoas(
     pessoaFoto, 
     pessoaDtDesaparecimento, 
     pessoaDtEncontro,
-    observacoesDescricao,
-    observacoesLocal,
-    observacoesData,
-    pessoaId,
-    usuarioId
+    
 }) {
   
     const [exibe, setExibe] = useState(false); 
@@ -33,7 +31,10 @@ export default function Pessoas(
     
         const FuncObserva = () => {
             setCriaobs(!criaObs); 
+            
         };
+
+       
 
     
     return (
@@ -53,23 +54,23 @@ export default function Pessoas(
                     </View>
                     <Text style={css.valor}>{pessoaCor}</Text>
                     <Text style={css.descricaoproduto}>{pessoaObservacao}</Text>
-                    <Detalhes />
-
-
+                    <Text style={css.descricaoproduto}>{pessoaSexo}</Text>
+                    <Text style={css.descricaoproduto}>{pessoaLocalDesaparecimento}</Text>
+                    <Text style={css.descricaoproduto}>{pessoaFoto}</Text>
+                    <Text style={css.descricaoproduto}>{pessoaDtDesaparecimento}</Text>
+                    <Text style={css.descricaoproduto}>{pessoaDtEncontro}</Text>
                     <TouchableOpacity style={css.btnDetalhes} onPress={FuncObserva}>
                         <Text style={css.btnDetalhesText}>
-                            {criaObs ? 'Fechar janela' : 'Criar nova Observação'}
+                            {criaObs ? 'Ocultar' : 'Criar nova Observação'}
                         </Text>
                     </TouchableOpacity>
-            {criaObs && ( 
-                <View style={css.detalhesModal}>
-                    <Text>OIIIII</Text>
+                 {criaObs && (  
+                    <Observacao/>
+                    
+                )}
                 </View>
-            
-      )}
-        </View>
         
-      )}
+      )} 
         
         </View>
 
@@ -77,7 +78,7 @@ export default function Pessoas(
 }
 const css = StyleSheet.create({
     
-    caixagrandona:{
+    caixagrandona: {
         marginTop: 80,
         
 
