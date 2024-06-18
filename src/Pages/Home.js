@@ -1,10 +1,10 @@
-import { View, Text, FlatList, Button, StyleSheet } from 'react-native'
+import { View, Text, FlatList, Button, StyleSheet, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator } from 'react-native';
 
 
 import Pessoas from '../Components/Pessoas';
-import Produto from '../Components/Produto';
+
 
 
 export default function Home() {
@@ -36,6 +36,10 @@ export default function Home() {
 
   return (
     <View>
+      <View style={css.container}>
+                <Image style={css.icone} source={require("../../assets/IconeFindmePNG.png")}></Image>
+                <Text>Welcome</Text>
+            </View>
       {   pessoas.length > 0 ?
           <FlatList
               data={pessoas}
@@ -50,6 +54,7 @@ export default function Home() {
               pessoaLocalDesaparecimento={item.pessoaLocalDesaparecimento}
               pessoaDtDesaparecimento={item.pessoaDtDesaparecimento}
               pessoaDtEncontro={item.pessoaDtEncontro}
+              pessoaStatus={item.pessoaStatus}
               
               />
              
@@ -58,13 +63,7 @@ export default function Home() {
             
           keyExtractor={(item) => item.id}
           
-        />   /*<Detalhes 
-                observacoesDescricao={item.observacoesDescricao}
-                observacoesLocal={item.observacoesLocal}
-                observacoesData={item.observacoesData}
-                pessoaId={item.pessoaId}
-                usuarioId={item.usuarioId}
-              />  */
+        />   
         : <ActivityIndicator size='large' color="#00ff00"/>
       } 
 
@@ -75,19 +74,16 @@ export default function Home() {
       
   )
 }
-const styles = StyleSheet.create({
+const css = StyleSheet.create({
   container: {
-    backgroundColor: "#191919",
-    flexGrow: 1,
-    color: "white",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  text: {
-    color: "white"
-  },
-  stories: {
-    width: "100%",
-    height: 100
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#f3f3ff'
+    }, icone: {
+      width: 100,
+      height: 50,
+      marginTop: 80
   }
+
 })

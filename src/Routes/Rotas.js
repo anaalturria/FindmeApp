@@ -11,16 +11,19 @@ import Login from '../Pages/Login';
 import Videos from '../Pages/Videos';
 import Perfil from '../Pages/Perfil';
 import Inserir from '../Pages/Inserir';
-
+import Cadastro from '../Pages/Cadastro'
 
 const Tab = createBottomTabNavigator();
 
 export default function Rotas() {
 
-    const { logado } = useContext(AuthContext);
+    const { logado, cadastro, setCadastro } = useContext(AuthContext);
 
-    if (!logado) {
+    if (!logado && !cadastro ) {
         return (<Login />)
+    }
+    if (!logado && cadastro) {
+        return (<Cadastro/>)
     }
 
 
