@@ -78,14 +78,17 @@ export default function Pessoas(
            <View style={css.caixaindividual}>
             <View style={css.Textealinha}>
             <View>
-                <Image style={css.fotona} source={{ uri: pessoaFoto }}  ></Image>
+                <Image style={{padding: 50,
+                                marginRight: 100,
+                                marginTop: 45}} 
+                        source={{ uri: pessoaFoto }}  ></Image>
             </View>
-          <View style={css.infoexibe}>
+          <View style={{alignItems: 'center', marginTop: 30}}>
           <View style={css.caixanomepessoa}>
                 <Text style={css.nomepessoa}>{pessoaNome}</Text>
             </View>     
             <TouchableOpacity style={css.btnDetalhes} onPress={FuncionaDetalhe}>
-                <Text style={css.btnDetalhesText}>
+                <Text style={{color: 'white', marginTop: 10}}>
                     {exibe ? 'Fechar Detalhes' : 'Detalhes'}
                 </Text>
             </TouchableOpacity>
@@ -93,21 +96,57 @@ export default function Pessoas(
             </View>
            </View>
                 {exibe && ( 
-                    <View style={css.caixaitens}>
-                    <Text style={css.tipo}>{pessoaRoupa}</Text>
-                    <Text style={css.valor}>{pessoaCor}</Text>
-                    <Text style={css.descricaoproduto}>{pessoaObservacao}</Text>
-                    <Text style={css.descricaoproduto}>{pessoaSexo}</Text>
-                    <Text style={css.descricaoproduto}>{pessoaLocalDesaparecimento}</Text>
-                    <Text style={css.descricaoproduto}>{pessoaDtDesaparecimento}</Text>
-                    <Text style={css.descricaoproduto}>{pessoaDtEncontro}</Text> 
-                    <Text style={css.descricaoproduto}>{pessoaStatus}</Text> 
+                    <View style={{alignItems: 'center', 
+                                    backgroundColor: '#900020',
+                                    marginTop: 10,
+                                    borderRadius: 10,
+                                    width: 350,
+                                    height: 650
+                                    }}>
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                        <Text style={{color: 'white', fontWeight: 'bold'}}>Roupa que estava usando:  </Text>
+                        <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaRoupa}</Text>
+                    </View>
+
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>Cor do individuo:  </Text>
+                    <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaCor}</Text>
+                    </View>
+
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>observação do individuo:  </Text>
+                    <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaObservacao}</Text>
+                    </View>
+
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>Sexo do individuo:  </Text>
+                    <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaSexo}</Text>
+                    </View>
+
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>Local no qual desapareceu:  </Text>
+                    <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaLocalDesaparecimento}</Text>
+                    </View>
+
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>Dia no qual desapareceu:  </Text>
+                    <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaDtDesaparecimento}</Text>
+                    </View>
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>Dia no qual foi encontrado:  </Text> 
+                    <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaDtEncontro}</Text>
+                    </View>
+                    <View style={{ marginTop: 10, flexDirection: 'row'}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>Status do individuo:  </Text> 
+                    <Text style={{color: 'white', fontStyle:'italic'}}>{pessoaStatus}</Text>
+                    </View>
+                    
                     <View>
                     <View style={css.caixatexto}>
-          <Text style={css.textcadastro} >Cadastre-Se</Text>
+          <Text style={{color: 'white', fontSize: 15, marginTop: 10, fontWeight: 'bold'}}> Envie uma nova observação para nosso sistema!</Text>
         </View> 
-        { sucesso ? <Text>Cadastro Realizado!</Text> :
-        <> 
+        { sucesso ? <Text>Observação enviada com sucesso!</Text> :
+        <View style={{alignItems: 'center', marginTop: 10}}> 
         <TextInput style={css.input}
             placeholder="descrição" placeholderTextColor={'white'} onChangeText={(digitado) => setObservacoesDescricao(digitado)} TextInput={observacoesDescricao}
         />
@@ -123,11 +162,12 @@ export default function Pessoas(
         <TextInput style={css.input}
             placeholder="usuario" placeholderTextColor={'white'} onChangeText={(digitado) => setUsuarioId(digitado)} TextInput={usuarioId}
         />
-        </> 
+        <TouchableOpacity style={{backgroundColor: '#640b0b', width: 100, alignItems: 'center', borderRadius: 10}} onPress={NovaOBS}><Text style={{color: 'white'}}>Enviar nova observação</Text></TouchableOpacity>
+        </View> 
         }
     
 
-      <TouchableOpacity style={css.btnLogin} onPress={NovaOBS}><Text style={css.btnLoginText}>Realizar Cadastro</Text></TouchableOpacity>
+
       
                     </View>
                     </View>
@@ -141,6 +181,11 @@ export default function Pessoas(
   )
 }
 const css = StyleSheet.create({
+    nomepessoa : {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
     input: {
         width: "90%",
         height: 50,
@@ -167,11 +212,6 @@ const css = StyleSheet.create({
     infoexibe: {
         flexDirection: 'column'
         
-    }, fotona: {
-        padding: 50,
-        marginRight: 60,
-        marginTop: 45
-
     }, caixaindividual: {
         width: "95%",
         height: 150,

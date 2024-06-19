@@ -8,7 +8,7 @@ import { AuthContext } from '../Context/AuthContext';
 import Home from '../Pages/Home';
 import Busca from '../Pages/Busca';
 import Login from '../Pages/Login';
-import Videos from '../Pages/Videos';
+import Observacao from '../Pages/Observacao';
 import Perfil from '../Pages/Perfil';
 import Inserir from '../Pages/Inserir';
 import Cadastro from '../Pages/Cadastro'
@@ -34,7 +34,7 @@ export default function Rotas() {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarStyle: {
-                        backgroundColor: '#191919',
+                        backgroundColor: 'white',
                     },
                     tabBarActiveTintColor: "white"
                 }}
@@ -44,47 +44,22 @@ export default function Rotas() {
                     component={Home}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={color} size={size} />
+                            <MaterialCommunityIcons name="home" color={'black'} size={size} />
                         ),
                     }}
                 />
-                <Tab.Screen
-                    name="Busca"
-                    component={Busca}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="magnify" color={color} size={size} />
-                        ),
-                    }}
-
-                />
-                <Tab.Screen
-                    name="Inserir"
-                    component={Inserir}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="plus-box" color={color} size={size} />
-                        ),
-                    }}
-                />
+                
+                
                 <Tab.Screen
                     name="Videos"
-                    component={Videos}
+                    component={Observacao}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="youtube-tv" color={color} size={size} />
+                            <MaterialCommunityIcons name="youtube-tv" color={'black'} size={size} />
                         ),
                     }}
                 />
-                <Tab.Screen
-                    name="Perfil"
-                    component={Perfil}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account-circle" color={color} size={size} />
-                        ),
-                    }}
-                />
+                
             </Tab.Navigator>
         </NavigationContainer>
     )

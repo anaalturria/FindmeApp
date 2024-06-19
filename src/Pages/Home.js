@@ -36,10 +36,7 @@ export default function Home() {
 
   return (
     <View>
-      <View style={css.container}>
-                <Image style={css.icone} source={require("../../assets/IconeFindmePNG.png")}></Image>
-                <Text>Welcome</Text>
-            </View>
+
       {   pessoas.length > 0 ?
           <FlatList
               data={pessoas}
@@ -61,7 +58,7 @@ export default function Home() {
 
             }
             
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.PessoaId}
           
         />   
         : <ActivityIndicator size='large' color="#00ff00"/>

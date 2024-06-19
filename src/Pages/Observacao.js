@@ -14,8 +14,6 @@ export default function Observacao() {
     const[pessoaId, setPessoaId] = useState();
     const[usuarioId, setUsuarioId] = useState();
     const[deleteResposta, setResposta] = useState(false);
-    const[ pessoas, setPessoas ] = useState([]);
-
   
     async function getObservacaos()
     {
@@ -133,69 +131,82 @@ export default function Observacao() {
     );
 
   return (
-    <View style={css.container}>
+    <View style={{ alignItems: 'center'}}>
+      <View style={{ marginTop: 20}}>
+      <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black',  }}>Observações gerais</Text>
+      </View>
       {edicao == false ?
-        <FlatList
-          style={css.flat}
-          data={observacaos}
-          keyExtractor={(item) => item.observacoesId}
-          renderItem={({item})=>(
-            <View >
-                <Text>
-                {item.observacoesLocal}
-                   <TouchableOpacity style={css.btnEdit} onPress={() => {setEdicao(true); getObservacao(item.observacoesId)}}>
-                      <Text style={css.btnLoginText}>EDITAR   </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={css.btnDelete} onPress={()=> showAlert(item.observacoesId, item.observacoesLocal)}>
-                      <Text style={css.btnLoginText}>EXCLUIR</Text>
-                    </TouchableOpacity>
-                </Text>
-            </View>
+    <FlatList
+    style={css.flat}
+    data={observacaos}
+    keyExtractor={(item) => item.observacoesId}
+    renderItem={({item})=>(
+      <View style={css.caixaind}>
+          
+          <View style={css.caixaind2}>
+          <Text style={{ color: 'white'}}>{item.observacoesData}</Text>
+          <Text style={{ color: 'white'}}>{item.observacoesDescricao}</Text>
+          <Text style={{ color: 'white'}}>{item.observacoesLocal}</Text>
+          <Text style={{ color: 'white'}}>{item.pessoaId}</Text>
+          <Text style={{ color: 'white'}}>{item.usuarioId}</Text>
+          </View>
+        <View style={css.caixabotao}>
+        <TouchableOpacity style={{ backgroundColor: '#640b0b'}} onPress={() => {setEdicao(true); getObservacao(item.observacoesId)}}>
+          <Text style={{ color: 'white'}}>EDITAR   </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ backgroundColor: '#640b0b'}}  onPress={()=> showAlert(item.observacoesId, item.observacoesLocal)}>
+          <Text style={{ color: 'white'}}>EXCLUIR</Text>
+        </TouchableOpacity>
+        </View>
+      
+      </View>
     )}
     />
 
   :
-  <View style={css.editar}>
+  <View style={{ width: 250, 
+  height: 300, 
+  backgroundColor: '#8b0000', 
+  marginTop: 200, 
+  borderRadius: 10,
+  alignItems: 'center'
+  }}>
     <TextInput
     inputMode="text"
-    style={css.input}
-    value={observacoesLocal}
-    onChangeText={(digitado)=> setObservacoesLocal(digitado)}
-    placeholderTextColor="black"   
-    />
-    <TextInput
-    inputMode="text"
-    style={css.input}
     value={observacoesData}
     onChangeText={(digitado)=> setObservacoesData(digitado)}
-    placeholderTextColor="black"   
+    style={{ color: 'white', marginTop: 50}}
     />
     <TextInput
     inputMode="text"
-    secureTextEntry={true}
-    style={css.input}
+    style={{ color: 'white'}}
     value={observacoesDescricao}
     onChangeText={(digitado)=> setObservacoesDescricao(digitado)}
-    placeholderTextColor="black"    
+  
     />
     <TextInput
-    inputMode="text"
-    secureTextEntry={true}
-    style={css.input}
+    inputMode="text"   
+    style={{ color: 'white'}}
+    value={observacoesLocal}
+    onChangeText={(digitado)=> setObservacoesLocal(digitado)}
+  
+    />
+    <TextInput
+    inputMode='numeric'
+    
     value={pessoaId}
     onChangeText={(digitado)=> setPessoaId(digitado)}
-    placeholderTextColor="black"    
+    style={{ backgroundColor: '#640b0b', color: 'white', borderRadius: 10, marginTop: 5}}   
     />
     <TextInput
-    inputMode="text"
-    secureTextEntry={true}
-    style={css.input}
+    inputMode='numeric'
     value={usuarioId}
     onChangeText={(digitado)=> setUsuarioId(digitado)}
-    placeholderTextColor="black"    
+    style={{ backgroundColor: '#640b0b', color: 'white', borderRadius: 10, marginTop: 5}}    
+
     />
-    <TouchableOpacity styele={css.btnCreate} onPress={()=>editObservacao()}>
-      <Text styel={css.btnLoginText}>SALVAR</Text>
+    <TouchableOpacity style={{ alignItems: 'center'}} onPress={()=>editObservacao()}>
+      <Text style={{ color: 'white'}}>SALVAR</Text>
     </TouchableOpacity>
   </View>
 
@@ -206,7 +217,7 @@ export default function Observacao() {
 const css = StyleSheet.create({
     container:{
       flexGrow: 1,
-      backgroundColor:'red',
+      backgroundColor:'white',
       alignItems:'center',
       marginTop: 20
     },
@@ -219,7 +230,21 @@ const css = StyleSheet.create({
       marginBottom: 25,
       color:"white",
       backgroundColor: "gray"
+  
   }, caixaind: {
-    backgroundColor: 'red'
+    backgroundColor: '#800000',
+    width: 250,
+    height: 180,
+    marginTop: 50,
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 15
+    
+  }, caixaind2: {
+    marginTop: 20,
+    
+  }, caixabotao: {
+    flexDirection: 'row',
+    marginTop: 20
   }
   })

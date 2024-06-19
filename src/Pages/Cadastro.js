@@ -36,10 +36,10 @@ export default function Inserir() {
     }
 
   return (
-    <ScrollView contentContainerStyle={{alignItems: 'center', justifyContent: 'center', height: '100%', backgroundColor: '#B03EE5'}}>
+    <ScrollView contentContainerStyle={{alignItems: 'center', justifyContent: 'center', height: '100%', backgroundColor: '#840000'}}>
        
         <View style={css.caixatexto}>
-          <Text style={css.textcadastro} >Cadastre-Se</Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white',  }} >Cadastre-se</Text>
         </View> 
         { sucesso ? <Text>Cadastro Realizado!</Text> :
         <> 
@@ -60,7 +60,12 @@ export default function Inserir() {
         { erro && <Text>ERRADO</Text>}
 
       <TouchableOpacity style={css.btnLogin} onPress={Cadastro}><Text style={css.btnLoginText}>Realizar Cadastro</Text></TouchableOpacity>
-      <TouchableOpacity style={css.btnCadastro} onPress={() => setCadastro( false ) }><Text style={css.btnCadastroText} >Voltar para o Login</Text></TouchableOpacity>
+      <TouchableOpacity style={{width: "90%",
+      marginTop: 10,
+      justifyContent: "flex-end",
+      alignItems: "flex-end",
+    alignItems: 'center'}} onPress={() => setCadastro( false ) }><Text style={{color: "white",
+      fontWeight: "bold"}} >Voltar para o Login</Text></TouchableOpacity>
     </ScrollView>
   )
 }
@@ -70,18 +75,21 @@ const css = StyleSheet.create({
     width: "90%",
     height: 50,
     borderRadius: 10,
+    borderColor: 'white',
+    borderWidth: 1,
     marginBottom: 15,
     padding: 15,
-    backgroundColor: "#262626",
+    backgroundColor: "#8b0000",
     color: "white"
     },
     btnLogin: {
       width: "90%",
-      height: 50,
-      borderWidth: 1,
-      borderRadius: 10,
-      marginTop: 30,
-      backgroundColor: "#8B33FF"
+        height: 50,
+
+        borderRadius: 10,
+
+        marginTop: 10,
+        backgroundColor: "#640b0b"
     },
     btnLoginText: {
       color: "white",
@@ -96,10 +104,7 @@ const css = StyleSheet.create({
       justifyContent: "flex-end",
       alignItems: "flex-end",
     },
-    btnCadastroText: {
-      color: "white",
-      fontWeight: "bold"
-    },
+    
     caixatexto:{
       marginBottom: "10%",
       color:"white"
